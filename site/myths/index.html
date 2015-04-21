@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, minimal-ui" />
+
+		<!-- not needed for cordova -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-touch-fullscreen" content="yes">
+
+        <!-- cordova
+        <script type="text/javascript" src="../cordova.js"></script>
+        <script type="text/javascript" src="../js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+        -->
+        
+		<link href="../shared-css/font-awesome-4.1.0/css/font-awesome.css" rel="stylesheet">
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600,200italic,400italic,600italic' rel='stylesheet' type='text/css'>
+		
+		<script type="text/javascript">
+		    less = { env: "production", async: true }
+		</script>
+        <link rel="stylesheet" href="../shared-css/circle.css" />
+		<link rel="stylesheet/less" type="text/css" href="../shared-css/appresent.less" />
+        <link rel="stylesheet/less" type="text/css" href="css/index.less" />
+		<script src="../shared-js/less-2.min.js" type="text/javascript"></script>
+				
+        <title>Mobile App Development Myths</title>
+    </head>
+
+    <body id="body">
+        <div class="button app-button" data-open="controls" id="controls-toggle">
+            <i class="fa fa-bars fa-lg"></i>
+        </div>
+		<div id="app" data-touchable="true">
+            <div id="map">
+
+                <div id="rot-container">
+                    <div class="block center" style="top: 36%">
+                        <p id="title" class="title">Mobile App<br/>Development Myths</p>
+                        <p class="presenters">Danny Brian,<br/>Kirk Knoernschild</p>
+                        <p class="twitter-follow">
+                            <a target="_BLANK" href="https://twitter.com/intent/user?screen_name=dannybrian"><i class="fa fa-twitter-square fa-lg"></i> dannybrian</a><br/>
+                            <a target="_BLANK" href="https://twitter.com/intent/user?screen_name=pragkirk"><i class="fa fa-twitter-square fa-lg"></i> pragkirk</a>
+                        </p>
+                    </div>
+                    
+                    <div class="block center" style="top: 43%">
+                        <p class="subcap">Join our "debate":</p>
+                        <p class="name" style="font-weight: 600;">g4tp.com</p>
+                        <img id="app-pic" class="subevent-pics right" src="images/app-pic.png" style="width: 150px;"/>
+                        <img id="lootcrate-pic" class="subevent-pics left" src="images/lootcrate.png" style="width: 200px;"/>
+                    </div>
+                    
+                    <div class="block center" style="top: 47%">
+                        <img src="images/myths.jpg" class="bordered" style="width: 700px; height: 482px; -webkit-transform: rotate(-2deg);"/>
+                    </div>
+                    
+                    <div id="winner" class="block center backed hidden" style="position: absolute; left: 34%; top: 49%; -webkit-transform: scale(0.6);">
+                        <p style="font-weight: 600; font-size: 70px; -webkit-transform: rotate(-7deg) skew(-2deg, -2deg) translate(-130px, -180px);">Audience Consensus</p>
+                        <div class="votes-tally shown" id="winner-tally">
+                            <div class="c100 big">
+                                <span>0%</span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="block center" style="top: 53%;">
+                        <p class="name small">What are some of the common myths surrounding mobile application development?</p>
+                        <p class="name small">How do these myths relate to architecting the digital business?</p>
+                        <p class="name small">What really matters when making mobile application development technology decisions?</p>
+                    </div>
+                    
+                    <div id="recommendations" class="block center" style="position: absolute; left: 58%; top: 42%;">
+                        <ul class="recommendations">
+                          <li id="recommend1"><i class="fa fa-check-square fa-lg"></i>Explore MADPs but do not consider them a replacement for a piecemeal strategy.</li>
+                          <li id="recommend2"><i class="fa fa-check-square fa-lg"></i>Accept that you will use native and Web technologies to build great apps. This is not a choice.</li>
+                          <li id="recommend3"><i class="fa fa-check-square fa-lg"></i>Cultivate a high degree of expertise with Web technologies, since this is the common denominator.</li>
+                          <li id="recommend4"><i class="fa fa-check-square fa-lg"></i>Invest in UX. No platform will prevent poor design decisions.</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="research" class="block center" style="position: absolute; left: 47%; top: 59%;">
+                        <ul class="research">
+                            <li><i class="fa fa-file fa-lg"></i><a href="http://www.gartner.com/document/2732417">Blueprint for Building Hybrid Mobile Apps</a><br/>
+                                <span class="author">Kirk Knoernschild (G00263115)</span>
+                            </li>
+                            <li><i class="fa fa-file fa-lg"></i><a href="http://www.gartner.com/document/2760418">Blueprint for Building Modern Web Apps with HTML5</a><br/>
+                                <span class="author">Danny Brian (G00263151)</span>
+                            </li>
+                            <li><i class="fa fa-file fa-lg"></i><a href="http://www.gartner.com/document/2674817">Popular Mobile App Architectures and the Frameworks That Love Them</a><br/>
+                                <span class="author">Kirk Knoernschild (G00262467)</span>
+                            </li>
+                            <li><i class="fa fa-file fa-lg"></i><a href="http://www.gartner.com/document/2683515">Build Great Mobile Apps with HTML5</a><br/>
+                                <span class="author">Danny Brian (G00260826)</span>
+                            </li>
+                            <li><i class="fa fa-file fa-lg"></i><a href="http://www.gartner.com/document/2597318">Modern Web App Architecture</a><br/>
+                                <span class="author">Danny Brian, Kirk Knoernschild (G00251864)</span>
+                            </li>
+                            <li><i class="fa fa-file fa-lg"></i><a href="http://www.gartner.com/document/2315516">Field Research Summary: Mobile Application Development</a><br/>
+                                <span class="author">Kirk Knoernschild, Danny Brian (G00237707)</span>
+                            </li>
+                        </ul>
+                    </div>
+                                              
+                    <div id="circle" class="container">
+                        
+                        <div><span class="block myth red">
+                            <p class="subcap">Myth #4.</p>
+                            <p class="name">Web technologies give you highly portable apps.</p>
+                            <div class="votes-count" id="myth4-votes">Votes: <span id="myth4-votes-count">0</span></div>
+                            <div class="timer" id="myth4-timer">2:00</div>
+                            
+                            <div class="votes-tally" id="myth4-votes-tally">
+                                <div class="c100">
+                                    <span>0%</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <img id="myth4-answer" class="true" src="images/true.png" style="-webkit-transform: rotate(-10deg); right: 50px;"/>
+                        </span></div>
+                        
+                        <div><span class="block myth yellow">
+                            <p class="subcap">Myth #5.</p>
+                            <p class="name">Cross platform frameworks negate the need to use the native toolset.</p>
+                            <div class="votes-count" id="myth5-votes">Votes: <span id="myth5-votes-count">0</span></div>
+                            <div class="timer" id="myth5-timer">2:00</div>
+                            
+                            <div class="votes-tally" id="myth5-votes-tally">
+                                <div class="c100">
+                                    <span>0%</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <img id="myth5-answer" class="false" src="images/false.png" style="-webkit-transform: rotate(-5deg);"/>
+                        </span></div>
+                        
+                        <div><span class="block myth green">
+                            <p class="subcap">Myth #6.</p>
+                            <p class="name">Developers with Web design experience will find it easy to build mobile apps with HTML5.</p>
+                            <div class="votes-count" id="myth6-votes">Votes: <span id="myth6-votes-count">0</span></div>
+                            <div class="timer" id="myth6-timer">2:00</div>
+                            
+                            <div class="votes-tally" id="myth6-votes-tally">
+                                <div class="c100">
+                                    <span>0%</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <img id="myth6-answer" class="false" src="images/false.png" style="-webkit-transform: rotate(-15deg); right: 100px;"/>
+                        </span></div>
+                        
+                         <div><span class="block myth blue">
+                            <p class="subcap">Myth #7.</p>
+                            <p class="name">Write once, run everywhere is a pipe dream and will remain so forever.</p>
+                            <div class="votes-count" id="myth7-votes">Votes: <span id="myth7-votes-count">0</span></div>
+                            <div class="timer" id="myth7-timer">2:00</div>
+                             
+                             <div class="votes-tally" id="myth7-votes-tally">
+                                <div class="c100">
+                                    <span>0%</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                             
+                            <img id="myth7-answer" class="true" src="images/true.png" style="-webkit-transform: rotate(5deg); right: 50px;"/>
+                        </span></div>
+                        
+                        <div><span class="block myth yellow">
+                            <p class="subcap">Myth #8.</p>
+                            <p class="name">An HTML5 app wrapped in a WebView control is likely to be rejected by the app store.</p>
+                            <div class="votes-count" id="myth8-votes">Votes: <span id="myth8-votes-count">0</span></div>
+                            <div class="timer" id="myth8-timer">2:00</div>
+                            
+                            <div class="votes-tally" id="myth8-votes-tally">
+                                <div class="c100">
+                                    <span>0%</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <img id="myth8-answer" class="false" src="images/false.png" style="-webkit-transform: rotate(10deg);"/>
+                        </span></div>
+                        
+                        <div><span class="block myth green">
+                            <p class="subcap">Myth #9.</p>
+                            <p class="name">Native mobile technologies are difficult to learn.</p>
+                            <div class="votes-count" id="myth9-votes">Votes: <span id="myth9-votes-count">0</span></div>
+                            <div class="timer" id="myth9-timer">2:00</div>
+                            
+                            <div class="votes-tally" id="myth9-votes-tally">
+                                <div class="c100">
+                                    <span>0%</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <img id="myth9-answer" class="false" src="images/false.png" style="-webkit-transform: rotate(-10deg); right: 100px;"/>
+                        </span></div>
+                        
+                        <div><span class="block myth yellow">
+                            <p class="subcap">Myth #10.</p>
+                            <p class="name">Apps are different from applications.</p>
+                            <div class="votes-count" id="myth10-votes">Votes: <span id="myth10-votes-count">0</span></div>
+                            <div class="timer" id="myth10-timer">2:00</div>
+                            
+                            <div class="votes-tally" id="myth10-votes-tally">
+                                <div class="c100">
+                                    <span>0%</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <img id="myth10-answer" class="true" src="images/true.png" style="-webkit-transform: rotate(10deg); right: 50px;"/>
+                        </span></div>
+                    
+                        <div><span class="block myth green">
+                            <p class="subcap">Myth #1.</p>
+                            <p class="name">HTML5 can’t deliver a great mobile UX.</p>
+                            <div class="votes-count" id="myth1-votes">Votes: <span id="myth1-votes-count">0</span></div>
+                            <div class="timer" id="myth1-timer">3:00</div>
+                            
+                            <div class="votes-tally" id="myth1-votes-tally">
+                                <div class="c100">
+                                    <span>0%</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="myth1-video-1" class="video-holder"></div>
+                            <div id="myth1-video-2" class="video-holder"></div>
+                            <img id="myth1-answer" class="false" src="images/false.png" style="-webkit-transform: rotate(-13deg);"/>
+                        </span></div>
+                        
+                        <div><span class="block myth yellow">
+                            <p class="subcap">Myth #2.</p>
+                            <p class="name">You need a vendor Mobile Application Development Platform for serious mobile app development.</p>
+                            <div class="votes-count" id="myth2-votes">Votes: <span id="myth2-votes-count">0</span></div>
+                            <div class="timer" id="myth2-timer">2:00</div>
+                            <div class="votes-tally" id="myth2-votes-tally">
+                                <div class="c100">
+                                    <span>0%</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <img id="myth2-answer" class="false" src="images/false.png" style="-webkit-transform: rotate(5deg); right: 100px"/>
+                        </span></div>
+                        
+                        <div><span class="block myth blue">
+                            <p class="subcap">Myth #3.</p>
+                            <p class="name">Targeting a single platform removes the need to build multi-channel Web apps.</p>
+                            <div class="votes-count" id="myth3-votes">Votes: <span id="myth3-votes-count">0</span></div>
+                            <div class="timer" id="myth3-timer">2:00</div>
+                            <div class="votes-tally" id="myth3-votes-tally">
+                                <div class="c100">
+                                    <span>0%</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <img id="myth3-answer" class="false" src="images/false.png" style="-webkit-transform: rotate(10deg); right: 150px;"/>
+                        </span></div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end #app -->
+        
+        <div id="controls">
+            <div id="admin-login">
+                <form id="login" action="/" method="post"><input id="password" type="password" size="20"/><input type="submit" style="-webkit-transform: translateX(400px);"/></form>
+            </div>
+            <div class="buttons">
+                <i data-goto="0" data-open="controls" class="fa fa-home fa-lg button"></i>
+                <br/>
+                <i class="fa fa-key fa-lg button" data-open="admin-login" id="login-button"></i>
+                <br/>
+                <i data-toggle="follow" class="fa fa-anchor fa-lg button" id="follow-button"></i>
+                <br/>
+                <i data-toggle="freetouch" data-open="controls" class="fa fa-arrows-alt fa-lg button"></i>
+                <br/>
+                <i data-toggle="sound" class="fa fa-volume-up fa-lg button"></i>
+                <br/>
+                <!--
+                <i data-goto="prev" class="fa fa-play fa-lg fa-flip-horizontal button"></i>
+                <br/>
+                <i data-goto="next" class="fa fa-play fa-lg button"></i>
+                <br/>
+                -->
+                <i data-toggle="notes" class="fa fa-comment fa-lg button" data-open="notes"></i>
+                <br/>
+                <i data-toggle="winners" class="fa fa-comment-o fa-lg button" data-open="winners"></i>
+                <br/>
+                <i data-do="refresh" class="fa fa-refresh fa-lg button"></i>
+                <br/>
+                <i data-do="resetFilters" class="fa fa-eye fa-lg button"></i>
+                <br/>
+            </div>
+            <input type="range" class="slider" id="contrast-slider" name="contrast" min="1" max="30"></input>
+            <input type="range" class="slider" id="bright-slider" name="saturation" min="1" max="30"></input>
+            <input type="range" class="slider" id="sat-slider" name="saturation" min="1" max="30"></input>
+            <br/>
+    
+            <div id="quickstats">
+                <i id="connected" class="fa fa-signal fa-lg button"></i> <span id="connected-users">0</span><br/><br/>
+            </div>
+
+            <br/>
+
+        </div>
+        
+        <div id="notes" data-touchable="true">
+            <div id="notes-text"></div>
+        </div>
+        <div id="winners" class="shown"></div>
+
+        <div id="url-reminder" style="display: none; position: fixed; bottom: -2px; left: 20px;">
+            <p class="name" style="font-weight: 400; font-size: 22px; color: #666;">g4tp.com</p>
+        </div>
+
+        <div class="logo">
+            <img src="../shared-images/gartner.png"/>
+        </div>
+
+        <div id="cover">
+            <div id="preloaded"></div>
+        </div>
+
+    	<script src="http://g4tp.com/node/socket.io/socket.io.js"></script>
+        <script src="../shared-js/hammer.min.js"></script>
+        <script src="../shared-js/hammer.fakemultitouch.js"></script>
+        <script src="../shared-js/hammer.showtouches.js"></script>
+        <script src="../shared-js/network.js"></script>
+		<script src="../shared-js/appresent.js"></script>
+        <script src="js/index.js"></script>
+
+    </body>
+</html>
