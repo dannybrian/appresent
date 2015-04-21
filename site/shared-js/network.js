@@ -4,7 +4,7 @@
  */
 
 
-// FIXME
+// Change this to your Node location
 var io = io('http://g4tp.com/danny', { path: '/node/socket.io'} );
 //var io = io('http://192.168.1.50/danny', { path: '/node/socket.io'} );
 
