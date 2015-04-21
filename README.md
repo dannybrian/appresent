@@ -96,4 +96,4 @@ There are too many of these to number, which might dissuade you from using the f
 * Simple string password for admin doesn't give you any real security, and the audience doesn't login. I limit their answers based on randomly assigned tokens. This lax security is sufficient for my short presentations, but may not be for yours.
 * No authoring tools. You create a big web page, and then you pan/zoom around it to mark your slide locations, copying and pasting the coordinates. But there's nothing here to help you with the creation of the web page itself.
 * Very large presentations containing lots of images can crash a browser. I recommend keeping the page under 3000px width and height, and limiting the images. Remember that the browsers transitions animations by caching bitmaps for hardware acceleration, so this can eat up memory quickly — believe me, I've pushed this boundary! Use the Chrome developer tools to see how the rendering actually happens in zones.
-* 
+* The audience app is not well tested. I know it doesn't work at all on the Android browser, but should on Chrome (all platforms) and Safari.
