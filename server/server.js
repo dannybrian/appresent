@@ -32,7 +32,7 @@ Node, you will need to reauthenticate. That's how I want it for now.
 
 // standalone:
 var io = require('socket.io')(3000);
-var mongodb = require('mongodb').MongoClient;
+//var mongodb = require('mongodb').MongoClient;
 var assert = require('assert');
 
 var MARKLIMIT = 5; // max votes/marks per section
@@ -41,7 +41,7 @@ var usercount = 0; // a count of users
 var users = new Object(); // a list of users
 var browsers = new Object(); // a list of the browsers
 var admins = new Object(); // authenticated clients
-var passwords = ['pinn91'];
+var passwords = ['dummypass'];
 var followers = new Object;
 var correct;
 var score = new Object;
