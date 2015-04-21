@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+
+		<!-- not needed for cordova -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-touch-fullscreen" content="yes">
+
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600,200italic,400italic,600italic' rel='stylesheet' type='text/css'>
+		
+		<script type="text/javascript">
+		    less = { env: "production" }
+		</script>
+		<link rel="stylesheet/less" type="text/css" href="css/tulito.less" />
+		<link rel="stylesheet/less" type="text/css" href="css/index.less" />
+		<script src="js/less-1.7.4.min.js" type="text/javascript"></script>
+
+        <title>G4TP: Danny Brian</title>
+    </head>
+
+    <body>
+        
+          <div id="right-pane-3" data-tulito-id="right-pane-3" data-tulito-class="hidden-pane" style="background-color: #555; z-index: 10000;" data-tulito-pos="right"  data-tulito-panegap="full">
+			<div class="tarrow"> <i class="fa fa-chevron-circle-left"></i> </div>
+
+			<p class="question cascade"><i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-left"></i>
+                <span class="question-text"> Question </span> <i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-right"></i>
+            </p>
+			
+			<div class="button-container" style="height: 200px">
+                 <form id="question" action="/" method="post">
+                     <input id="q1" type="text" size="18" maxlength="18"/>
+                     <input type="submit" style="-webkit-transform: translateX(1000px);"/></form>
+              </div>
+			</div>
+		</div>
+        
+        
+		<div id="left-pane" data-tulito-id="left-pane" data-tulito-class="hidden-pane" data-tulito-pos="left"  data-tulito-panegap="full">
+			<div class="tarrow"> <i class="fa fa-chevron-circle-right"></i> </div>
+
+			<p class="question cascade"><i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-left"></i>
+                <span class="question-text"> Question </span> <i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-right"></i>
+            </p>
+			
+			<div class="button-container">
+				<div data-template="button" data-tulito-class="button" class="cascade option square">1</div>
+			</div>
+		</div>
+		
+		<div id="right-pane" data-tulito-id="right-pane" data-tulito-class="hidden-pane"  data-tulito-panegap="full" data-tulito-pos="right">
+			<div class="tarrow"> <i class="fa fa-chevron-circle-left"></i> </div>
+            
+            <p class="question cascade"><i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-left"></i>
+                <span class="question-text"> Question </span> <i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-right"></i>
+            </p>
+			
+			<div class="button-container">
+				<div data-template="button" data-tulito-class="button" class="cascade option square">1</div>
+			</div>
+		</div>
+		
+        <div id="top-pane" data-tulito-id="top-pane" data-tulito-class="hidden-pane" data-tulito-panegap="full" data-tulito-pos="up" class="hidden-pane">
+			<p class="question cascade"><i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-left"></i>
+                <span class="question-text"> Question </span> <i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-right"></i>
+            </p>
+			
+			<div class="button-container">
+				<div data-template="button" data-tulito-class="button" class="cascade option square">1</div>
+			     <div class="tarrow"> <i class="fa fa-chevron-circle-down"></i></div>
+		      </div>
+        </div>
+		
+		<div id="bottom-pane" data-tulito-id="bottom-pane" data-tulito-class="hidden-pane" data-tulito-pos="down" data-tulito-panegap="full" class="hidden-pane">
+			<div class="tarrow"> <i class="fa fa-chevron-circle-up"></i> </div>
+            
+            <p class="question cascade"><i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-left"></i>
+                <span class="question-text"> Question </span> <i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-right"></i>
+            </p>
+			
+			<div class="button-container">
+				<div data-template="button" data-tulito-class="button" class="cascade option square">1</div>
+			</div>
+		</div>
+        
+        <div id="left-pane-2" data-tulito-id="left-pane-2" data-tulito-class="hidden-pane" data-tulito-pos="left"  data-tulito-panegap="full">
+			<div class="tarrow"> <i class="fa fa-chevron-circle-right"></i> </div>
+
+			<p class="question cascade"><i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-left"></i>
+                <span class="question-text"> Question </span> <i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-right"></i>
+            </p>
+			
+			<div class="button-container">
+				<div data-template="button" data-tulito-class="button" class="cascade option square">1</div>
+			</div>
+		</div>
+        
+      
+		<div id="right-pane-2" data-tulito-id="right-pane-2" data-tulito-class="hidden-pane"  data-tulito-panegap="full" data-tulito-pos="right">
+			<div class="tarrow"> <i class="fa fa-chevron-circle-left"></i> </div>
+            
+            <p class="question cascade"><i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-left"></i>
+                <span class="question-text"> Question </span> <i style="color:rgba(200,200,200,0.7); font-size: 20px;" class="fa fa-quote-right"></i>
+            </p>
+			
+			<div class="button-container">
+				<div data-template="button" data-tulito-class="button" class="cascade option square">1</div>
+			</div>
+		</div>
+		<!--
+        <div data-tulito-id="thanks-pane" data-tulito-class="hidden-pane" data-tulito-pos="down" class="hidden-pane">
+			<div class="vcenter-cont" style="width: 100%; text-align: center;">
+				<div class="vcenter" style="width: 250px; text-align: center;">
+					<p>Thank you!</p>
+				</div>
+			</div>
+			<div class="tarrow"> <i class="fa fa-chevron-circle-up"></i> </div>
+		</div>
+        -->
+		
+		<div data-tulito-id="back-pane-left" data-tulito-class="back-pane" data-tulito-parentdrag="right" data-tulito-parent="main">
+			<ul>
+				<li>Current Presenters</li>
+				<ul>
+					<li data-tulito-class="button" data-tulito-toggle="back-pane-left" data-template="presenter"></li>
+				</ul>
+		</div>
+		
+		<!-- this is the main screen -->
+        <div data-tulito-id="main" data-tulito-class="pane" class="app">
+			<div class="title-bar">
+				<div class="menu-button left" data-tulito-class="button" data-tulito-toggle="back-pane-left"> <i class="fa fa-bars"></i> </div>
+				<p><span id="title" class="title"></span></p>
+				<!-- 
+                <div class="menu-button right" data-tulito-class="button" data-tulito-toggle="top-pane"> <i class="fa fa-info-circle"></i> </div>
+                -->
+			</div>
+			
+			<p id="main-session-text" class="session-text">
+            </p>
+			
+            <div id="twitter-buttons" style="position: absolute; bottom: 10%; left: 0; width: 100%; text-align: center;"></div>
+            
+		</div>
+
+        <!--
+		<div class="loader">
+			<i class="fa fa-spinner our-spin"></i>
+		</div>
+		-->
+
+		<script src="/node/socket.io/socket.io.js"></script>
+		
+		<!-- <script type="text/javascript" src="js/all.min.js"></script> -->
+        <script type="text/javascript" src="js/hammer.min.js"></script>
+		<script type="text/javascript" src="js/tulito.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+            
+    </body>
+</html>

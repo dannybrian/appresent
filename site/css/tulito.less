@@ -1,0 +1,609 @@
+/*! tulito.less
+ * http://tulito.org
+ *
+ * Copyright (c) 2013-2014 Danny Brian <danny@brians.org>;
+ * Licensed under the Apache 2 license */
+
+/* 
+	This file contains CSS depended on by the tulito library. It's recommended
+	that you not change it. To modify styling, start instead with the index.css
+	or simply create your own styles in your own CSS file and load it after
+	tulito.less.
+	
+	We're using LESS variables in order to have strict control over sizing.
+	This helps a lot when we need to know exact screen dimensions for pane 
+	and other animations. It also keeps your changes closer to the original 
+	code by letting you change more in the variables. SOME OF THESE VARIABLES
+	HAVE CORRESPONDING VALUES IN TULITO.JS.
+*/
+
+@swipeSpeed: 300ms;   /* the speed of the CSS transition for panes */
+@cornerRadius: 3px;   /* the default radius of rounded corners */
+@paneShadow: 10px;    /* the total width or height of a pane's drop shadow */
+@openedPaneGap: 150px; /* how far from the edge we take an open pane */
+@openedHiddenPaneGap: 24px; /* for hidden panes, how far from the edge they stop when opened */
+@shovedPaneGap: 90px; /* for "shoved" panes, how many pixels they get shoved */
+
+@screenWidth: 320px;  /* the width of the screen, changed automatically by tulito */
+@screenHeight: 960px; /* the height of the screen, changed automatically by tulito */
+
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection */
+}
+
+*, *:before, *:after {
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+html {
+	-webkit-backface-visibility: none;
+	font-size: 62.5%; /* this let's em = 10px */
+}
+
+body {
+	
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -webkit-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-overflow-scrolling: auto;
+	-webkit-backface-visibility: none;
+
+    background-attachment:fixed;
+    margin:0px;
+    padding:0px;
+	
+	/* prevents scrolling to the right side when the right swipe pane comes into view (on desktop) */
+	overflow: hidden !important;
+	
+  	backface-visibility:hidden;
+	-ms-content-zooming: none;
+	-ms-touch-action:none;
+}
+
+
+/*
+   BUTTONS
+
+   Buttons have an .active CSS class as well as an :active pseudo-class. The tulito JavaScript 
+   uses these to give buttons a 200ms delay from when they are tapped to when they are released 
+   in order to provide native-like feedback to mobile users.
+*/
+
+[data-tulito-class="button"]
+{
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	.border-radius(@cornerRadius);
+	padding: 7px 10px;
+	cursor: pointer;
+	
+	margin-top: 6px;
+			
+	/* To slow down the press, we set the .active class too in the events for 200ms */
+	&.small {
+		text-align: center;
+		display: inline-block;
+		float: left;
+		letter-spacing: 1px;
+		margin-left: 11px;
+		font-size: 1.2rem;
+		width: (@screenWidth / 2 - 16);
+		background-color: #4f4f4f;
+		&.wide {
+			width: (@screenWidth - 21);
+			letter-spacing: 3px;
+		}
+		&.active {
+			background-color: #414141;	
+		}
+		&:active {
+			background-color: #414141;	
+		}
+	}
+	
+	&.big {
+		background-color: #506d49;
+		color: #ccc;
+		font-size: 2.2rem;
+		font-weight: 400;
+		letter-spacing: 3px;
+		margin-left: 10px;
+		margin-right: 10px;
+		margin-top: 10px;
+		&.on {
+			background-color: #63885a;
+			color: #eee;
+			&.active {
+				background-color: #70A364;
+				color: #fff;
+			}
+			&:active {
+				background-color: #70A364;
+				color: #fff;
+			}
+		}
+	}
+	
+	&.bottom {
+		position: absolute;
+		width: @screenWidth - 21;
+		bottom: 12px;
+	}
+}
+
+li[data-tulito-class="button"]
+{
+	margin: 0;
+	padding: 0;
+	&.active {
+		background-color: #666;
+		i {
+			color: #fff;
+		}
+	}
+	&:active {
+		background-color: #666;
+		color: #fff;
+		i {
+			color: #fff;
+		}
+	}
+}
+
+.menu-button {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: -5px;
+	left: 1px;
+	font-size: 2.0rem;
+
+	.border-radius(@cornerRadius);
+
+	&.active {
+		background-color: #666;	
+	}
+	&:active {
+		background-color: #666;	
+	}
+	&.right {
+		left: auto;
+		right: 1px;
+	}
+	i {
+		color: #bbb;
+	}
+}
+
+
+/* 
+   PANES
+
+   Panes are content that can be hidden off screen, animated in, and dragged or swiped off.
+   This CSS uses classes .shown and .opened to keep the pane hidden (display: none) until
+   it's time to animate. Tulito.js adds the .shown, then the .opened class. This lets the 
+   transition do its thing.
+*/
+
+/* ALL PANES */
+
+[data-tulito-class$="pane"]
+{
+	display: none;
+	position:absolute;
+	left:0;
+	top:0;
+	height: 100%;
+	width: 100%;
+	padding:0;
+	z-index: 2000;
+	background-color: #303030;
+	background-repeat:no-repeat;
+	background-size: 300px 211px;
+	background-position: center;
+	overflow: hidden; /* important to keeping .app static regardless of what happens in children! */
+}
+
+/* unsure why firefox dislikes the 100% height in this case, 
+   but a pixel height seems to work. */
+@-moz-document url-prefix() {
+	[data-tulito-class$="pane"]
+	{
+    	height: @screenHeight;
+	}
+}
+
+
+/*
+   STANDARD PANES 
+
+   These are always shown, so we never hide them. However, their being "open" means they are moved
+   to the side.
+*/
+
+[data-tulito-class="pane"]
+{
+	.translate (0px, 0px, 0px);
+	.transition (-webkit-transform, @swipeSpeed);
+	.transition (transform, @swipeSpeed);
+	.box-shadow(0px, 0px, @paneShadow);
+	&.notransition {
+		.notransition();
+	}
+
+	&.draggedright
+	{		
+		&.opened {
+			.translate((@screenWidth - @openedPaneGap), 0px, 0px);
+			&.full-pane {
+				.translate(@screenWidth, 0px, 0px);
+			}
+		}
+		
+		.tarrow {
+			right: 10px;
+			top: 45%;
+		}
+	}
+	
+	&.draggedleft
+	{		
+		&.opened {
+			.translate(-(@screenWidth - @openedPaneGap), 0px, 0px);
+			&.full-pane {
+				.translate(-(@screenWidth), 0px, 0px);
+			}
+		}
+		
+		.tarrow {
+			right: 10px;
+			top: 45%;
+		}
+	}
+	&.shovedright {
+		.translate(@shovedPaneGap, 0px, 0px);
+		&.full-pane {
+			.translate(@screenWidth, 0px, 0px);
+		}
+	}
+	&.shovedleft {
+		.translate(-(@shovedPaneGap), 0px, 0px);
+		&.full-pane {
+			.translate(-(@screenWidth), 0px, 0px);
+		}
+	}
+}
+
+/* HIDDEN PANE */
+
+[data-tulito-class="hidden-pane"]
+{
+	display: none;
+	
+	background-color: #333;
+	
+	.translate (0px, 0px, 0px);
+		
+	.tarrow, .tclose {
+		position: absolute;
+		i {
+			color: rgba(10,10,10,0.3);
+		}
+	}
+	
+	&[data-tulito-pos="left"]
+	{
+		.translate ((-@screenWidth), 0px, 0px);
+		.transition (all, @swipeSpeed);
+		&.notransition {
+			.notransition();
+		}
+		&.shown {
+			display: inline-block;
+			&.opened {
+				.box-shadow(0px, 0px, @paneShadow);
+				.translate((-@openedHiddenPaneGap), 0px, 0px);
+				&.full-pane {
+					.translate(0, 0, 0);
+				}
+			}
+		}
+		
+		.tarrow {
+			right: 0px;
+			top: 47%;
+		}
+	}
+	&[data-tulito-pos="right"]
+	{
+		.translate ((@screenWidth), 0px, 0px);
+		.transition (all, @swipeSpeed);
+		&.notransition {
+			.notransition();
+		}
+		&.shown {
+			display: inline-block;
+			&.opened {
+				.box-shadow(0px, 0px, @paneShadow);
+				.translate(@openedHiddenPaneGap, 0px, 0px);
+				&.full-pane {
+					.translate(0, 0, 0);
+				}
+			}
+		}
+		
+		.tarrow {
+			left: 10px;
+			top: 47%;
+		}
+			
+	}
+	&[data-tulito-pos="up"]
+	{
+		.translate (0px, (-@screenHeight), 0px);
+		.transition (all, @swipeSpeed);
+		&.notransition {
+			.notransition();
+		}
+		&.shown {
+			display: inline-block;
+			&.opened {
+				.box-shadow(0px, 0px, @paneShadow);
+				.translate(0px, (-@openedHiddenPaneGap), 0px);
+				&.full-pane {
+					.translate(0, 0, 0);
+				}
+			}
+		}
+		
+		.tarrow {
+			bottom: 5px;
+			left: 47%;
+		}
+	}
+	&[data-tulito-pos="down"]
+	{
+		.translate (0px, (@screenHeight), 0px);
+		.transition (all, @swipeSpeed);
+		&.notransition {
+			.notransition();
+		}
+		&.shown {
+			display: inline-block;
+			&.opened {
+				.box-shadow(0px, 0px, @paneShadow);
+				.translate(0px, @openedHiddenPaneGap, 0px);
+				&.full-pane {
+					.translate(0, 0, 0);
+				}
+			}
+		}
+		
+		.tarrow {
+			top: 5px;
+			left: 47%;
+		}
+		
+		.tclose {
+			top: -5px;
+			right: 0px;
+			color: rgba(10,10,10,0.3);
+			font-size: 22px;
+			pointer-events: auto;
+		}
+	}
+}
+
+/* BACK PANE */
+
+[data-tulito-class="back-pane"]
+{
+	display: none;
+	.translate (0px, 0px, 0px);
+	background-color: #222;
+	z-index: -1;
+	
+	.transition (all, @swipeSpeed);
+	&.shown {
+		display: inline-block;
+	}
+	
+	&.notransition {
+		.notransition();
+	}
+	
+	/* for backpanes, the shoved classes get _removed_ on a show, to bring them
+	   into proper alignment. This is the opposite of the hidden pane shove behavior. */
+	&.shovedright {
+		.translate(@shovedPaneGap, 0px, 0px);
+	}
+	&.shovedleft {
+		.translate(-(@shovedPaneGap), 0px, 0px);
+	}
+}
+
+[data-tulito-shovedist="full"]
+{
+	display: none;
+	.translate (0px, 0px, 0px);
+	background-color: #222;
+	z-index: -1;
+	
+	.transition (all, @swipeSpeed);
+	&.shown {
+		display: inline-block;
+	}
+	
+	&.notransition {
+		.notransition();
+	}
+	
+	&.shovedright {
+		.translate(@screenWidth, 0px, 0px);
+	}
+	&.shovedleft {
+		.translate(-(@screenWidth), 0px, 0px);
+	}
+}
+
+
+/* The only way to get proper margins around a scaling textarea: surround it with this parent div */
+.textarea-parent {
+	margin: 10px;
+	textarea {
+		border: 0;
+		width: 100%;
+		.border-radius(@cornerRadius);
+		padding: 10px 10px;
+		background-color: #666;
+		color: #eee;
+
+		font-weight: 200;
+		letter-spacing: 1px;
+		font-size: 1.2rem;
+		text-align: left;
+		resize: none;
+		overflow: hidden;
+		min-height: 70px;
+		height: 220px;
+		&::-webkit-input-placeholder { /* WebKit browsers */
+			font-style: italic;
+		    color: #bbb;
+		}
+		&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+			font-style: italic;
+		    color: #bbb;
+		}
+		&::-moz-placeholder { /* Mozilla Firefox 19+ */
+			font-style: italic;
+		    color: #bbb;
+		}
+		&:-ms-input-placeholder { /* Internet Explorer 10+ */
+			font-style: italic;
+			color: #bbb;
+		}
+	}
+}
+
+/* CAROUSEL */
+
+.h-scroller {
+	/* .transition (200ms); */
+	white-space: nowrap;
+}
+
+/* UTILITY CLASSES */
+
+.notransition {
+	.notransition();
+}
+
+.nomouse {
+	pointer-events: none;
+}
+
+
+.inactive
+{
+	pointer-events: none;
+}
+
+/* Make sure that menu buttons are never disabled, even when other panes are open. */
+.menu-button {
+	pointer-events: auto;
+}
+
+/* KEYFRAMES */
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+
+/* IMAGE PRELOADER */
+
+body:after {
+	/* content: url("img/logo.png"); */ 
+	display: none;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 480px) {
+  body {
+    overflow-y: auto;
+  }
+}
+
+/* MIXINS */
+
+.transition (@attr: all, @time: 0.2s) {
+	transition: @attr @time ease;
+	-webkit-transition: @attr @time ease;
+	-moz-transition: @attr @time ease;
+}
+
+.translate (@x, @y, @z) {
+	transform: translate(@x, @y) translateZ(@z);
+	-ms-transform: translate(@x, @y) translateZ(@z);
+	-moz-transform: translate(@x, @y) translateZ(@z);
+	-webkit-transform: translate(@x, @y) translateZ(@z);
+}
+
+.rotate (@rotation) {
+	transform:rotate(@rotation);
+	-ms-transform:rotate(@rotation); /* IE 9 */
+	-webkit-transform:rotate(@rotation); /* Safari and Chrome */
+}
+
+.scale (@x, @y) {
+	transform:scale(@x, @y); /* W3C */
+	-webkit-transform:scale(@x, @y); /* Safari and Chrome */
+	-moz-transform:scale(@x, @y); /* Firefox */
+	-ms-transform:scale(@x, @y); /* IE 9 */
+	-o-transform:scale(@x, @y); /* Opera */
+}
+
+.border-radius (@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.box-shadow (@x: 0px, @y: 3px, @blur: 4px, @alpha: 0.3) {
+    -webkit-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+    -moz-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+    box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+}
+
+.touch-hl (@name, @precolor, @postcolor) {
+    /* ANIMATIONS */
+	@keyframes @name {
+	    from { background-color: @precolor; }
+	    10% { background-color: @postcolor; }
+		90% { background-color: @postcolor; }
+	    to { background-color: @precolor; }
+	}
+	@-webkit-keyframes @name {
+	    from { background-color: @precolor; }
+	    10% { background-color: @postcolor; }
+		90% { background-color: @postcolor; }
+	    to { background-color: @precolor; }
+	}
+}
+
+.notransition () {
+	-moz-transition: none;
+	-webkit-transition: none;
+	-o-transition: none;
+	transition: none;
+}
