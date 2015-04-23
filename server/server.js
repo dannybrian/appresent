@@ -86,6 +86,7 @@ io.on("connect_failed", function() {
     console.log("failure");
 });
 
+/*
 mongodb.connect('mongodb://localhost:27017/quiz', 
   function(err, newdb) {
     assert.equal(null, err);
@@ -93,6 +94,7 @@ mongodb.connect('mongodb://localhost:27017/quiz',
     db = newdb;
   }
 );
+*/
 
 //of('/danny')
 var everyone = io.of('/danny').on('connection', function(socket) {
